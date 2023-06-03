@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from todo.serializers import TodoSerializer
-from todo.models import TodoModel
+from todo.models import TodoModel,Tag
 
 # Create your views here.
 
@@ -21,7 +21,14 @@ class TodoBasic(APIView):
     def post(self, request, format=None):
         serializer = TodoSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            todo = serializer.save()
+            for tag_title in request.data.get('tags'):
+                try:
+                    tag = Tag.objects.get(title=tag_title)
+                    todo.tags.add(tag)
+                except Tag.DoesNotExist:
+                    tag = Tag.objects.create(title=tag_title)
+                    todo.tags.add(tag)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

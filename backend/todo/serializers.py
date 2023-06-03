@@ -1,13 +1,17 @@
-from taggit.serializers import (TagListSerializerField,TaggitSerializer)
 from rest_framework import serializers
-from todo.models import TodoModel
+from todo.models import TodoModel,Tag
 
 
-class TodoSerializer(TaggitSerializer,serializers.ModelSerializer):
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'title')
+class TodoSerializer(serializers.ModelSerializer):
 
     due_date = serializers.DateField(required=False)
-    tag = TagListSerializerField(required=False)
+    tags = TagSerializer(many=True, read_only=True)
     
     class Meta():
         model = TodoModel
-        fields =  ['title','description','due_date','tag','status']
+        fields =  ['title','description','due_date','tags','status']

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from todo.models import TodoModel
+from todo.models import TodoModel,Tag
 from django.contrib.auth.models import Group
 from django import forms
 
@@ -13,5 +13,6 @@ class TodoModelAdmin(admin.ModelAdmin):
     list_filter = ('title','status')
     search_fields = ['title', 'description']
 admin.site.unregister(Group)
+admin.site.register(Tag)
 
 admin.site.site_header = "Todo App"
