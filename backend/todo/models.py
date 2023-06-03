@@ -1,6 +1,7 @@
 from django.db import models
+from datetime import date
 import uuid
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator,ValidationError,MinValueValidator
 
 # Create your models here.
 class Tag(models.Model):
@@ -10,7 +11,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+    
 class TodoModel(models.Model):
+    
     STATUS_OPTIONS = [
         ("O", "Open"),
         ("W", "Working"),

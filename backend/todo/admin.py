@@ -9,8 +9,8 @@ from django import forms
 # admin.site.register(TodoModel)
 @admin.register(TodoModel)
 class TodoModelAdmin(admin.ModelAdmin):
-    list_display = ('title','description','due_date','status')
-    list_filter = ('title','status')
+    list_display = ('id','title','description','due_date','status')
+    list_filter = ('due_date','status')
     search_fields = ['title', 'description']
 admin.site.unregister(Group)
 admin.site.register(Tag)

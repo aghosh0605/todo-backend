@@ -11,7 +11,7 @@ class TodoSerializer(serializers.ModelSerializer):
 
     due_date = serializers.DateField(required=False)
     tags = TagSerializer(many=True, read_only=True)
-    
+    timestamp = serializers.DateTimeField(read_only=True)
     class Meta():
         model = TodoModel
-        fields =  ['title','description','due_date','tags','status']
+        fields =  '__all__'
