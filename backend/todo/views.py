@@ -63,6 +63,8 @@ class TodoBasic(APIView):
                 todo.tags.add(tag)
             except TodoModel.DoesNotExist as e:
                 return Response(data={"message":"No Todo found with the ID"}, status=status.HTTP_404_NOT_FOUND)
+            except KeyError as e:
+                return Response(data={"message":"Please provide all the keys"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None,id=None):
