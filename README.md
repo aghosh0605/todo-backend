@@ -32,6 +32,47 @@ python3 manage.py migrate   # Responsible for applying and unapplying migrations
 python3 manage.py runserver         # TO start the server
 ```
 
+## Importtant Commands to depoy with Nginx Reverse Proxy
+
+1. **Run the command on your server**
+
+Tested with Ubuntu 20.04LTS
+
+```bash
+cd /etc/nginx/sites-available/
+touch task.cybersupport.in
+ln -s /etc/nginx/sites-available/task.cybersupport.in /etc/nginx/sites-enabled/task.cybersupport.in
+nano task.cybersupport.in
+```
+
+2. **paste the content into nano**
+
+```bash
+server {
+	server_name api.cybersupport.in;
+
+
+        location / {
+                proxy_pass http://localhost:7070;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+        listen 80;
+        listen [::]:80;
+}
+```
+
+3. **Point your applied FQDN to the server IP with A record(IPv4 Address) in your DNS Records**
+4. **Run the below commands**
+
+```bash
+nginx -t
+certbot --nginx -d task.cybersupport.in
+nginx -s reload
+```
+
 ## API Endpoints
 
 ### Request
