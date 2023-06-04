@@ -1,7 +1,6 @@
 from django.db import models
-from datetime import date
 import uuid
-from django.core.validators import MinLengthValidator,ValidationError,MinValueValidator
+from django.core.validators import MinLengthValidator,ValidationError
 
 # Create your models here.
 class Tag(models.Model):
