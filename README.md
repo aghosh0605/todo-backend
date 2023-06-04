@@ -9,7 +9,6 @@ python3 -m venv env               # Set up a virtual environment
 source env/bin/activate           #	Activate the virtual environment
 python -m pip install django
 python -m pip freeze > requirements.txt        # Install Django
-python -m pip install -r requirements.txt      # Pin your dependencies
 django-admin startproject backend       # Set up a Django project
 python manage.py startapp todo          # Start a Django app
 ```

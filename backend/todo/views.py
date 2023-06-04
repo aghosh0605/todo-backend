@@ -7,10 +7,13 @@ from todo.serializers import TodoSerializer
 from todo.models import TodoModel, Tag
 from django.core import serializers
 from django.core.validators import ValidationError
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
 class TodoBasic(APIView):
+    permission_classes = [IsAuthenticated, ]
+
     """
     Retrieve, update or delete a todo.
     """
