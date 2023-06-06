@@ -8,9 +8,12 @@ from todo.models import TodoModel, Tag
 from django.core import serializers
 from django.core.validators import ValidationError
 from rest_framework.permissions import IsAuthenticated
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class TodoBasic(APIView):
     permission_classes = [IsAuthenticated, ]
 
