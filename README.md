@@ -49,7 +49,7 @@ nano task.cybersupport.in
 
 ```bash
 server {
-	server_name api.cybersupport.in;
+	server_name task.cybersupport.in;
 
 
         location / {
